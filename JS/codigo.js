@@ -2,17 +2,17 @@
 //Creamos el objeto tienda para añadirle datos posteriormente
 var tienda = new Tienda();
 ocultarFormularios();
-cargarDatos();
-console.warn("Objeto global:");
-console.dir(tienda);
-console.warn("Array de clientes:");
-console.table(tienda.clientes);
-console.warn("Array de juegos:");
-console.table(tienda.juegos);
-console.warn("Array de compras:");
-console.table(tienda.compras);
-console.warn("Array de suscripciones:");
-console.table(tienda.suscripciones);
+
+// console.warn("Objeto global:");
+// console.dir(tienda);
+// console.warn("Array de clientes:");
+// console.table(tienda.clientes);
+// console.warn("Array de juegos:");
+// console.table(tienda.juegos);
+// console.warn("Array de compras:");
+// console.table(tienda.compras);
+// console.warn("Array de suscripciones:");
+// console.table(tienda.suscripciones);
 //-------------------------EVENTSLISTENERS----------------------------------------------//
 //-----Botonones de navegacion superior-------------------
 document.getElementById("btnInicio").addEventListener("click", muestraInicio);
@@ -24,7 +24,7 @@ document.getElementById("btnAltaSuscriptor").addEventListener("click", muestraFo
 document.getElementById("btnAltaCliente").addEventListener("click", muestraFormAltaCliente);
 document.getElementById("btnAltaJuego").addEventListener("click", muestraFormAltaJuego);
 //-----Fin botones de navegacion superior-------------------
-document.getElementById("btnAceptarAltaPersona").addEventListener("click", altaUsuario);
+ document.getElementById("btnAceptarAltaPersona").addEventListener("click", altaUsuario);
 document.getElementById("btnAceptarAltaJuego").addEventListener("click", altaJuego);
 document.getElementById("btnDarAltaSuscriptor").addEventListener("click", altaSuscriptor);
 document.getElementById("btnBuscaBiblioteca").addEventListener("click", bibliotecaBuscada);
@@ -94,10 +94,6 @@ function ocultarFormularios() {
     if (document.querySelector("#listadoJuegos") != null)
         document.querySelector("#listadoJuegos").remove();
     if (oTabla != null) {
-        //    oTabla.remove();
-        // document.querySelector("label").remove();
-        // document.querySelector("#comboBoxGenero").remove();
-
         for (let index = 0; index < oTabla.length; index++) {
             oTabla[index].remove();
 
@@ -156,53 +152,35 @@ function limpiarInputs(inputs) {
 
 function altaUsuario() {
 
+    let dFecha = formAdministracionUsuario.txtFecha.value.trim();
+    let arrayFecha = dFecha.split("/");
+    let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
+    
+        var oCliente = {
+            id_cliente: formAdministracionUsuario.txtNIFUsuario.value.trim(),
+            nombre: formAdministracionUsuario.txtNombre.value.trim(),
+            apellidos: formAdministracionUsuario.txtApellidos.value.trim(),
+            fecha_nac: dFechaCambiada,
+            email: formAdministracionUsuario.txtDireccion.value.trim()
+        };
+        var sParametros = "datos=" + JSON.stringify(oCliente);
 
-
-    let form = document.getElementById("formAdministracionUsuario");
-    let inputs = form.getElementsByTagName("input");
-
-
-    let sNombre = inputs[0].value;
-    let sApellidos = inputs[1].value;
-    let dFecha = inputs[2].value;
-    let sNIF = inputs[3].value;
-    let sEmail = inputs[4].value;
-
-    let res = validaExpRegUsuario();
-
-    if (res != "") {
-        alert(res);
-
-
-    } else {
-        let iPosicion = tienda.clientes.length;
-
-
-        let arrayFecha = dFecha.split("/");
-
-        let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
-
-
-
-        let oUsuario = new Cliente(iPosicion + 1, sNIF, sNombre, sApellidos, dFechaCambiada, sEmail);
-
-        if (tienda.registrarCliente(oUsuario)) {
-            alert("Cliente dado de alta correctamente");
-            limpiarInputs(inputs);
-            ocultarFormularios();
-        } else {
-            alert("Ya existe un cliente con ese correo");
-        }
-
-
-
-    }
-
-
-
-
+        $.post("alta_cliente/altacliente.php", sParametros, respuestaAltaCliente, 'json');
 }
 
+function respuestaAltaCliente(oDatos, sStatus, oXHR) {
+
+    
+    if (oDatos.error) {
+        alert(oDatos.mensaje);
+    } else {
+        alert(oDatos.mensaje);
+        let form = document.getElementById("formAdministracionUsuario");
+        let inputs = form.getElementsByTagName("input");
+        limpiarInputs(inputs);
+        ocultarFormularios();
+    }
+}
 
 function altaJuego() {
     let form = document.getElementById("formAdministracionJuegos");
@@ -408,117 +386,3 @@ function introduceCompra(oCompra) {
     tienda.registrarCompra(oCompra);
 }
 //------------------------------FIN METODOS AUXILIARES-----------------------------------------------//
-
-//------------------------------AÑADIDO DE DATOS CON XML----------------------------------------------//
-
-
-function loadXMLDoc(filename) {
-    if (window.XMLHttpRequest) {
-        var xhttp = new XMLHttpRequest();
-    } else // code for IE5 and IE6
-    {
-        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xhttp.open("GET", filename, false);
-
-    xhttp.send();
-
-    return xhttp.responseXML;
-}
-
-function cargarDatos() {
-
-
-    var oXML = loadXMLDoc("../steam.xml");
-    var oJuegos = oXML.getElementsByTagName("juego");
-    var oClientes = oXML.getElementsByTagName("cliente");
-    var oCompras = oXML.getElementsByTagName("compra");
-    var oSuscripciones = oXML.getElementsByTagName("suscripcion");
-
-
-
-    //Introduzco los juegos
-    for (var i = 0; i < oJuegos.length; i++) {
-
-        // console.log(oJuegos[i]);
-        var titulo = oJuegos[i].getElementsByTagName("titulo")[0].textContent;
-        var genero = oJuegos[i].getElementsByTagName("genero")[0].textContent;
-        var anyo = oJuegos[i].getElementsByTagName("anyo_lanzamiento")[0].textContent;
-        var precio = oJuegos[i].getElementsByTagName("precio")[0].textContent;
-        var pegi = oJuegos[i].getElementsByTagName("pegi")[0].textContent;
-
-
-        let arrayFecha = anyo.split("/");
-
-        let dFecha = new Date(arrayFecha[0], arrayFecha[1] - 1, arrayFecha[2]);
-
-        var juego = new Juego(i + 1, titulo, genero, dFecha, parseFloat(precio), parseInt(pegi));
-
-        tienda.registrarJuego(juego);
-
-    }
-    //Introduzco los usuarios
-
-    for (var i = 0; i < oClientes.length; i++) {
-
-        var id = oClientes[i].getElementsByTagName("id")[0].textContent;
-        var nif = oClientes[i].getElementsByTagName("nif")[0].textContent;
-        var nombre = oClientes[i].getElementsByTagName("nombre")[0].textContent;
-        var apellidos = oClientes[i].getElementsByTagName("apellidos")[0].textContent;
-        var fecha_nac = oClientes[i].getElementsByTagName("fecha_nac")[0].textContent;
-        var correo = oClientes[i].getElementsByTagName("email")[0].textContent;
-
-        let arrayFecha = fecha_nac.split("/");
-
-        let dFecha = new Date(arrayFecha[0], arrayFecha[1] - 1, arrayFecha[2]);
-
-        var usuario = new Cliente(parseInt(id), nif, nombre, apellidos, dFecha, correo);
-
-        tienda.registrarCliente(usuario);
-    }
-
-    //Introduzco las compras
-
-    for (var i = 0; i < oCompras.length; i++) {
-
-        var id_cliente = oCompras[i].getElementsByTagName("id_cliente")[0].textContent;
-        var id_juego = oCompras[i].getElementsByTagName("id_juego")[0].textContent;
-        var fecha = oCompras[i].getElementsByTagName("fecha")[0].textContent;
-        var coste = oCompras[i].getElementsByTagName("coste_compra")[0].textContent;
-
-        let arrayFecha = fecha.split("/");
-
-        let dFecha = new Date(arrayFecha[0], arrayFecha[1] - 1, arrayFecha[2]);
-
-        var compra = new Compra(i + 1, parseInt(id_cliente), parseInt(id_juego), dFecha, parseFloat(coste));
-
-        tienda.registrarCompra(compra);
-    }
-
-    for (var i = 0; i < oSuscripciones.length; i++) {
-        var idCliente = oSuscripciones[i].getElementsByTagName("id")[0].textContent;
-        var fechaExp = oSuscripciones[i].getElementsByTagName("fechaExpiracion")[0].textContent;
-
-        let arrayFecha = fechaExp.split("/");
-
-        let fecha = new Date(arrayFecha[0], arrayFecha[1] - 1, arrayFecha[2]);
-
-        var suscripcion = new Suscripcion(i + 1, parseInt(idCliente), fecha);
-
-        tienda.registrarSuscripcion(suscripcion);
-    }
-
-    //alert("Se han cargado los datos correctamente.");
-}
-
-function filtraGenero() {
-
-    let genero = document.querySelector("#comboBoxGenero").value;
-
-    tienda.listarJuegosPorGenero(genero);
-
-}
-
-
-
-//------------------------------FIN AÑADIDO DE DATOS CON XML----------------------------------------------//
