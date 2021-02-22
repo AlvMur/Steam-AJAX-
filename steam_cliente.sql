@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-02-2021 a las 19:31:19
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Tiempo de generación: 22-02-2021 a las 19:39:45
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: steam_cliente
 --
+CREATE DATABASE IF NOT EXISTS steam_cliente DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE steam_cliente;
 
 -- --------------------------------------------------------
 
@@ -27,6 +30,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla cliente
 --
 
+DROP TABLE IF EXISTS cliente;
 CREATE TABLE cliente (
   id_cliente varchar(9) COLLATE utf16_spanish_ci NOT NULL,
   nombre varchar(30) COLLATE utf16_spanish_ci DEFAULT NULL,
@@ -52,6 +56,7 @@ INSERT INTO cliente (id_cliente, nombre, apellidos, fecha_nac, email) VALUES
 -- Estructura de tabla para la tabla compra
 --
 
+DROP TABLE IF EXISTS compra;
 CREATE TABLE compra (
   id_cliente int(11) NOT NULL,
   id_juego int(11) NOT NULL,
@@ -75,6 +80,7 @@ INSERT INTO compra (id_cliente, id_juego, id_compra, fecha, coste_compra) VALUES
 -- Estructura de tabla para la tabla juego
 --
 
+DROP TABLE IF EXISTS juego;
 CREATE TABLE juego (
   id_juego int(4) NOT NULL,
   titulo varchar(30) COLLATE utf16_spanish_ci NOT NULL,
@@ -107,6 +113,7 @@ INSERT INTO juego (id_juego, titulo, genero, año_lanzamiento, precio, pegi) VAL
 -- Estructura de tabla para la tabla subscripcion
 --
 
+DROP TABLE IF EXISTS subscripcion;
 CREATE TABLE subscripcion (
   id_subscripcion int(4) DEFAULT NULL,
   id_cliente int(4) DEFAULT NULL,
