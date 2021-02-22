@@ -1,0 +1,73 @@
+.logo {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+
+/*Estilo de la Tabla*/
+
+table {
+    font-size: 13px;
+    font-weight: bold;
+    color: #c7d5e0;
+    font-family: “Trebuchet MS”, Arial;
+    text-align: left;
+}
+
+tr:hover td {
+    background: #66c0f4;
+    color: #339;
+}
+
+thead {
+    background-color: #0f2231;
+}
+
+table thead tr td {
+    padding: 10px;
+}
+
+table tbody tr td {
+    padding: 10px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #2a5b83;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #447faf;
+}
+
+button {
+    background-color: #0f2231;
+}
+
+
+/* Este es nuestro diseño para los campos no válidos */
+
+input:invalid {
+    border-color: #900;
+    background-color: #FDD;
+}
+
+input:focus:invalid {
+    outline: none;
+}
+
+input:read-only {
+    background-color: rgb(0, 0, 0);
+    color: whitesmoke;
+}
+
+/*Estilo Select*/
+select,button{
+    background-color: #2a5b83;
+    color: whitesmoke;
+}
+option{
+    color: whitesmoke;
+}
+
+/*Estilo Index*/
+

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ejercicio de clase 3 - Bloque 2</title>
+
+    <link href="./CSS/Stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style>
+        .error {
+            background-color: rgb(238, 224, 32);
+            border-color: red;
+        }
+        
+        body {
+            background-color: #242424;
+            color: #c7d5e0;
+        }
+        
+        label {
+            color: #c7d5e0;
+        }
+        
+        .normal {
+            background-color: #c7d5e0;
+            border-color: rgb(58, 153, 231);
+            color: black;
+        }
+        
+        .foto {
+            background-color: rgb(145, 145, 145);
+            border-color: rgb(145, 145, 145);
+            color: black;
+        }
+        
+        .linea {
+            background-color: #242424;
+        }
+        
+        legend {
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#"><img class="logo" src="./IMG/Steam-Logo.png"></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class=""><a href="#" id="btnInicio">INICIO</a></li>
+                <li class=""><a href="#" id="btnTienda">TIENDA</a></li>
+                <li class=""><a href="#" id="btnBiblioteca">BIBLIOTECA</a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">ADMINISTRAR
+                <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="btnAdministrar">
+                        <li><a href="#" id="btnAltaSuscriptor">Alta suscriptor</a></li>
+                        <li><a href="#" id="btnAltaCliente">Alta Cliente</a></li>
+                        <li><a href="#" id="btnAltaJuego">Alta Juego</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!--Fin Bloque Menú de Opciones-->
+
+    <!--Bloque de Formularios-->
+    <div class="container-fluid">
+        <div class="cuerpo">
+
+            <!--Formulario de Alta de Persona-->
+            <form class="form-horizontal" name="formAdministracion" id="formAdministracionSuscriptor">
+                <fieldset>
+                    <legend>Alta Subscriptor</legend>
+
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtNIF">Introduzca su NIF: </label>
+                        <div class="col-md-4">
+                            <input id="txtNIF" name="txtNIF" type="text" placeholder="" class="form-control input-md normal" maxlength="9">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnDarAltaSuscriptor"></label>
+                        <div class="col-md-4">
+                            <input type="button" id="btnDarAltaSuscriptor" name="btnDarAltaSuscriptor" class="btn btn-default normal" value="Aceptar" />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+            <!--Fin Formulario de Alta Persona-->
+            <!-- Formulario Biblioteca-->
+            <form class="form-horizontal" name="formAdministracion" id="formBiblioteca">
+                <fieldset>
+                    <legend>Busqueda biblioteca</legend>
+
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtEmail">Introduzca su Email:</label>
+                        <div class="col-md-4">
+                            <input id="txtEmail" name="txtEmail" type="text" placeholder="" class="form-control input-md normal">
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnBuscaBiblioteca"></label>
+                        <div class="col-md-4">
+                            <input type="button" id="btnBuscaBiblioteca" name="btnBuscaBiblioteca" class="btn btn-info normal" value="Aceptar" />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+            <!-- Formulario administracion Usuario -->
+            <form class="form-horizontal" name="formAdministracion" id="formAdministracionUsuario">
+                <fieldset>
+                    <legend>Alta Cliente</legend>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtNombreCliente">Introduzca su nombre: </label>
+                        <div class="col-md-4">
+                            <input id="txtNombreCliente" name="txtNombre" type="text" placeholder="NOMBRE" class="form-control input-md normal" maxlength="48">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtApellidosCliente">Introduzca sus apellidos: </label>
+                        <div class="col-md-4">
+                            <input id="txtApellidosCliente" name="txtApellidos" type="text" placeholder="APELLIDOS" class="form-control input-md normal" maxlength="48">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtFechaCliente">Introduzca su fecha de nacimiento:</label>
+                        <div class="col-md-4">
+                            <input id="txtFechaCliente" name="txtFecha" type="text" placeholder="DD/MM/YYYY" class="form-control input-md normal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtNIFUsuario">Introduzca su DNI:</label>
+                        <div class="col-md-4">
+                            <input id="txtNIFUsuario" name="txtNIFUsuario" type="text" placeholder="12345678A" class="form-control input-md normal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtDireccionCliente">Introduzca su email:</label>
+                        <div class="col-md-4">
+                            <input id="txtDireccionCliente" name="txtDireccion" type="text" placeholder="EMAIL" class="form-control input-md normal">
+                        </div>
+                    </div>
+
+
+
+                    <br>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnAceptarAltaPersona"></label>
+                        <div class="col-md-4">
+                            <input type="button" id="btnAceptarAltaPersona" name="btnAceptarAltaPersona" class="btn btn-default normal" value="Registrar Usuario" />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+            <!-- Formulario administracion Juegos -->
+            <form class="form-horizontal" name="formAdministracion" id="formAdministracionJuegos">
+                <fieldset>
+                    <legend>Alta Juegos</legend>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtTitulo">Introduzca su titulo: </label>
+                        <div class="col-md-4">
+                            <input id="txtTitulo" name="txtTitulo" type="text" placeholder="TITULO" class="form-control input-md normal" maxlength="48">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtGenero">Introduzca sus genero: </label>
+                        <div class="col-md-4">
+                            <input id="txtGenero" name="txtGenero" type="text" placeholder="GENERO" class="form-control input-md normal" maxlength="48">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtFechaJuego">Introduzca su año de lanzamiento:</label>
+                        <div class="col-md-4">
+                            <input id="txtFechaJuego" name="txtFecha" type="text" placeholder="DD/MM/YYYY" class="form-control input-md normal">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPrecio">Introduzca su precio:</label>
+                        <div class="col-md-4">
+                            <input id="txtPrecio" name="txtPrecio" type="text" placeholder="00.00" class="form-control input-md normal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPegi">Introduzca pegi:</label>
+                        <div class="col-md-4">
+                            <input id="txtPegi" name="txtPegi" type="text" placeholder="PEGI" class="form-control input-md normal">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnAceptarAltaJuego"></label>
+                        <div class="col-md-4">
+                            <input type="button" id="btnAceptarAltaJuego" name="btnAceptarAltaJuego" class="btn btn-default normal" value="Registrar Juego " />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+
+            <div id="main" style="background-color: #242424;">
+                <!---->
+
+                <div class="row">
+                    <div class="col-md-12 col-center" style="background-color: #242424; color: #ffffff; ">
+                        <h1 align="center">Bienvenidos a Steam</h1>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-4 col-md-4 linea">
+                        <div class="thumbnail foto">
+                            <img src="https://cdn140.picsart.com/321987801322201.png" alt="...">
+                            <div class="caption">
+                                <h3>The binding of Isaac</h3>
+                                <p>Cuando la madre de Isaac empieza a escuchar la voz de Dios exigiéndole un sacrificio para demostrar su fe, Isaac huye hacia el sótano para enfrentarse a montones de desquiciados enemigos, hermanos y hermanas perdidos, sus
+                                    miedos y, finalmente, a su madre. The Binding of Isaac es un shooter de rol y acción generado aleatoriamente con fuertes elementos de roguelike. Mientras siguen a Isaac en su viaje, los jugadores encontrarán extraños
+                                    tesoros que cambiarán la forma de Isaac dotándole de habilidades sobrehumanas que le permitirán enfrentarse a hordas de misteriosas criaturas, descubrir secretos y abrirse paso luchando hasta un lugar seguro.</p>
+                                <p>
+                                    <a href="#" class="btn btn-primary normal" role="button">Indie</a>
+                                    <a href="#" name="btnMandarTienda" class="btn btn-default normal" role="button">+</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-4 linea">
+                        <div class="thumbnail foto">
+                            <img src="https://img.discogs.com/iqtTcCW46D8Gl_WRj_5I5AnTogE=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-1170068-1197914299.jpeg.jpg" alt="...">
+                            <div class="caption">
+                                <h3>BioShock</h3>
+                                <p>BioShock es un shooter distinto a todos los que has jugado antes, lleno de armas y tácticas nunca vistas. Tendrás un completo arsenal a tu disposición: desde sencillos revólveres a lanzagranadas y lanzadores de productos
+                                    químicos, pero también estarás obligado a modificar tu ADN para crear un arma mucho más mortífera: tú. Al inyectarte plásmidos conseguirás superpoderes: lanza descargas eléctricas al agua para electrocutar múltiples
+                                    enemigos, o congélalos en un bloque de hielo para hacerlos pedazos con un golpe de llave inglesa. Ningún encuentro se juega de la misma manera, ni dos jugadores jugarán igual.</p>
+                                <p><br>
+                                    <a href="#" class="btn btn-primary normal" role="button ">Shooter</a>
+                                    <a href="#" name="btnMandarTienda" class="btn btn-default normal " role="button">+</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-4 linea">
+                        <div class="thumbnail foto">
+                            <img src="https://news.xbox.com/es-latam/wp-content/uploads/sites/4/Forza-Horizon-4-Key-Art-Horizontal-hero-hero-hero-1-small.jpg?fit=300%2C300" alt="...">
+                            <div class="caption ">
+                                <h3>Forza Horizon 4</h3>
+                                <p>Las temporadas dinámicas lo cambian todo en el festival automotriz más grande del mundo. Vaya solo o forme un equipo con otros para explorar la hermosa e histórica Gran Bretaña en un mundo abierto compartido. Recoge, modifica
+                                    y conduce más de 450 coches. Corre, realiza acrobacias, crea y explora: elige tu propio camino para convertirte en una superestrella de Horizon.</p>
+                                <p><br><br><br>
+                                    <a href="#" class="btn btn-primary normal" role="button">Conduccion</a>
+                                    <a href="#" name="btnMandarTienda" class="btn btn-default normal" role="button">+</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!---->
+            </div>
+
+
+
+
+
+            <!--Bloque de Listados-->
+
+            <div class="col-md-6" id="areaListado">
+                <h3 id="titulo"></h3>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <!--Fin de Bloque de Listados-->
+
+    <!--Fin Bloque de Formularios-->
+
+
+
+
+
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script type="text/javascript" src="./JS/clases.js"></script>
+    <script type="text/javascript" src="./JS/codigo.js"></script>
+    <script type="text/javascript" src="./JS/ValidacionForm.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>
