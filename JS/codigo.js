@@ -92,14 +92,15 @@ function ocultarFormularios() {
     //Oculta las tablas
     let oTabla = document.getElementsByTagName("table");
     if (document.querySelector("#listadoJuegos") != null)
-        document.querySelector("#listadoJuegos").remove();
-    if (oTabla != null) {
-        for (let index = 0; index < oTabla.length; index++) {
-            oTabla[index].remove();
+    //    document.querySelector("#listadoJuegos").remove();
+        document.querySelector("#listadoJuegos").style.display = "none";
+    // if (oTabla != null) {
+    //     for (let index = 0; index < oTabla.length; index++) {
+    //         oTabla[index].remove();
 
-        }
+    //     }
 
-    }
+    // }
 
 
     //Oculta el div con el comboBox
