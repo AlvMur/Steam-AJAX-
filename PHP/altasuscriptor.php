@@ -5,7 +5,7 @@ $servidor  = "localhost";
 $basedatos = "steam_cliente";
 $usuario   = "root";
 $password  = "";
-print_r($_POST);
+
 $id_cliente=$_POST["id_cliente"];
 $fecha_expiracion=$_POST["fecha_expiracion"];
 
