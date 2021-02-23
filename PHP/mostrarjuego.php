@@ -19,14 +19,14 @@ $XML .='<datos>';
 
 while ($fila = mysqli_fetch_array($resultados)) {
     
-    $XML .='<juego>';
-        $XML .='<id_juego>'.$fila["id_juego"].'</id_juego>';
-        $XML .='<titulo>'.$fila["titulo"].'</titulo>';
-        $XML .='<genero>'.$fila["genero"].'</genero>';
-        $XML .='<anyo_lanzamiento>'.$fila["anyo"].'</anyo_lanzamiento>';
-        $XML .='<precio>'.$fila["precio"].'</precio>';
-        $XML .='<pegi>'.$fila["pegi"].'</pegi>';
-    $XML .='</juego>';
+    $XML .='<tr>';
+        $XML .='<td>'.$fila["titulo"].'</td>';
+        $XML .='<td>'.$fila["genero"].'</td>';
+        $XML .='<td>'.$fila["anyo"].'</td>';
+        $XML .='<td>'.$fila["precio"].'</td>';
+        $XML .='<td>'.$fila["pegi"].'</td>';
+        $XML .='<td>'.'<button value="1">Comprar</button>'.'</td>';
+    $XML .='</tr>';
 }
 
  echo $XML;

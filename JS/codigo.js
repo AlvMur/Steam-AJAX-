@@ -407,31 +407,10 @@ function respuestaBiblioteca(data,status,oXHR) {
 
 function muestraJuegos(genero){
 
-    $('#lista').find('tbody').load("PHP/mostrarjuego.php", "", respuestaMuestraJuegos());
+    $('#lista').find('tbody').load("PHP/mostrarjuego.php", "");
 }
 
-function respuestaMuestraJuegos(oDatos, sStatus, oXHR) {
 
-    alert("Los datos se han cargado correctamente");
-    
-    
-    
-     //var oXML = loadXMLDoc(oDatos);
-    // var oJuegos = oXML.getElementsByTagName("juego");
-
-    //  for (var i = 0; i < oJuegos.length; i++) {
-
-    //     // console.log(oJuegos[i]);
-    //     var titulo = oJuegos[i].getElementsByTagName("titulo")[0].textContent;
-    //     var genero = oJuegos[i].getElementsByTagName("genero")[0].textContent;
-    //     var anyo = oJuegos[i].getElementsByTagName("anyo")[0].textContent;
-    //     var precio = oJuegos[i].getElementsByTagName("precio")[0].textContent;
-    //     var pegi = oJuegos[i].getElementsByTagName("pegi")[0].textContent;
-
-    //     alert(titulo);
-    //  }
-    
-}
 //-----------------------------METODOS AUXILIARES---------------------------------------------------//
 function _buscarCliente(emailBuscado) {
     let oClienteExistente = null;
