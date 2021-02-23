@@ -403,6 +403,7 @@ function respuestaBiblioteca(data,status,oXHR) {
     let tabla = divBiblioteca.querySelector("#lista");
     let tBody = tabla.querySelector("tbody");
     tBody.innerHTML="";
+<<<<<<< HEAD
 
     for (let index = 0; index < data.length; index++) {
         
@@ -410,6 +411,15 @@ function respuestaBiblioteca(data,status,oXHR) {
         
     }
 
+=======
+
+    for (let index = 0; index < data.length; index++) {
+        
+        tBody.innerHTML+="<tr><td>"+data[index].titulo+"</td><td>"+data[index].genero+"</td><td>"+data[index].año_lanzamiento+"</td><td>"+data[index].precio+"</td><td>"+data[index].pegi+"</td></tr>";
+        
+    }
+
+>>>>>>> main
     divBiblioteca.style.display="block";
 
     
