@@ -155,6 +155,13 @@ function altaUsuario() {
     let dFecha = formAdministracionUsuario.txtFecha.value.trim();
     let arrayFecha = dFecha.split("/");
     let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
+    console.log(dFechaCambiada);
+    let res = validaExpRegJuego();
+
+    if (res != "") {
+        alert(res);
+
+    } else {
     
         let oCliente = {
             id_cliente: formAdministracionUsuario.txtNIFUsuario.value.trim(),
@@ -165,7 +172,8 @@ function altaUsuario() {
         };
         let sParametros = "datos=" + JSON.stringify(oCliente);
 
-        $.post("../PHP/altacliente.php", sParametros, respuestaAltaCliente, 'json');
+        $.post("PHP/altacliente.php", sParametros, respuestaAltaCliente, 'json');
+    }
 }
 
 function respuestaAltaCliente(oDatos, sStatus, oXHR) {
@@ -194,6 +202,8 @@ function altaJuego() {
 
     } else {
        
+        let dFechaLanzamiento= document.getElementById("txtFechaJuego").value.trim();
+
         let arrayFecha = dFechaLanzamiento.split("/");
 
         let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
@@ -211,6 +221,7 @@ function altaJuego() {
        let titulo= document.getElementById("txtTitulo").value.trim();
        let genero= document.getElementById("txtGenero").value.trim();
        let año_lanzamiento= dFechaCambiada;
+       console.log(año_lanzamiento);
        let precio=parseFloat(document.getElementById("txtPrecio").value.trim());
        let pegi=document.getElementById("txtPegi").value.trim();
 
@@ -221,9 +232,9 @@ function altaJuego() {
         alert("Juego insertado");
         }
     };
-        xmlhttp.open("POST", "../PHP/altajuego.php", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("titulo="+titulo+"&genero="+genero+"&año_lanzamiento="+año_lanzamiento+"&precio="+precio+"&pegi="+pegi);
+        xmlhttp.open("POST", "PHP/altajuego.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("titulo="+titulo+"&genero="+genero+"&año_lanzamiento="+año_lanzamiento+"&precio="+precio+"&pegi="+pegi);
    
   }
 
