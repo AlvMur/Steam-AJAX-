@@ -60,6 +60,10 @@ function muestraTienda() {
 
     document.getElementById("listadoJuegos").style.display = "block";
     //tienda.listarJuegos();
+
+
+    let genero = $('#comboBoxGenero').find('option:selected').text();
+    muestraJuegos(genero);
 }
 
 function muestraBiblioteca() {
@@ -348,6 +352,35 @@ function bibliotecaBuscada() {
 
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
 
+function muestraJuegos(){
+
+
+    $('#lista').find('tbody').load("mostrarjuego.php", "", respuestaMuestraJuegos());
+
+    // $.post("PHP/altacliente.php", sParametros, respuestaAltaCliente, 'json');
+
+}
+function respuestaMuestraJuegos(oDatos, sStatus, oXHR) {
+
+    // var sTabla = '<table border="1">';
+
+    // sTabla += '<thead><tr><th>CodCliente</th><th>Nombre</th><th>Apellidos</th><th>Telefono</th></thead>';
+
+    // sTabla += "<tbody>";
+    // for (var i = 0; i < oDatos.length; i++) {
+    //     sTabla += "<tr>";
+    //     sTabla += "<td>" + oDatos[i].CodCliente + "</td>";
+    //     sTabla += "<td>" + oDatos[i].Nombre + "</td>";
+    //     sTabla += "<td>" + oDatos[i].Apellidos + "</td>";
+    //     sTabla += "<td>" + oDatos[i].Telefono + "</td>";
+    //     sTabla += "</tr>";
+    // }
+    // sTabla += "</tbody></table>";
+
+    // var oVentana = window.open("", "_blank");
+
+    // oVentana.document.body.innerHTML = sTabla;
+}
 //-----------------------------METODOS AUXILIARES---------------------------------------------------//
 function _buscarCliente(emailBuscado) {
     let oClienteExistente = null;
