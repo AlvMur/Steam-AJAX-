@@ -5,17 +5,17 @@ $servidor  = "localhost";
 $basedatos = "steam_cliente";
 $usuario   = "root";
 $password  = "";
+print_r($_POST);
+$id_cliente=$_POST["id_cliente"];
+$fecha_expiracion=$_POST["fecha_expiracion"];
 
-$datosJSON = $_POST["datos"];
-
-$datos = json_decode($datosJSON);
 
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mysqli_error($conexion));
 mysqli_query($conexion,"utf8");
 
 $sql = "INSERT INTO subscripcion (id_cliente, fecha_expiracion, precio) VALUES ('"; 
-$sql.= $datos->id_cliente."','". $datos->fecha_expiracion."',10);";
+$sql.= $id_cliente."','". $fecha_expiracion."',10);";
 $resultado = mysqli_query($conexion,$sql);
 
 // echo $sql;
