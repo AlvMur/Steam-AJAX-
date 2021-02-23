@@ -11,12 +11,14 @@ $password  = "";
 $email = $_GET["email"];
 
 
+
+
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mysqli_error($conexion));
 mysqli_set_charset($conexion,"utf8");
 mysqli_query($conexion,"utf8");
 
-$sql = "SELECT titulo,genero,año_lanzamiento,precio,pegi FROM juego INNER JOIN compra ON juego.id_juego = compra.id_juego INNER JOIN cliente ON compra.id_cliente=cliente.id_cliente WHERE cliente.email LIKE '$email'";
+$sql = "SELECT titulo,genero,anyo_lanzamiento,precio,pegi FROM juego INNER JOIN compra ON juego.id_juego = compra.id_juego INNER JOIN cliente ON compra.id_cliente=cliente.id_cliente WHERE cliente.email LIKE '$email'";
 
 $resultado = mysqli_query($conexion,$sql);
 $arrayADevolver=array();
