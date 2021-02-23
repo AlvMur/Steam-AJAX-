@@ -58,8 +58,8 @@ function muestraInicio() {
 function muestraTienda() {
     ocultarFormularios();
 
-
-    tienda.listarJuegos();
+    document.getElementById("listadoJuegos").style.display = "block";
+    //tienda.listarJuegos();
 }
 
 function muestraBiblioteca() {
@@ -103,10 +103,10 @@ function ocultarFormularios() {
 
 
     //Oculta el div con el comboBox
-    let oDiv = document.querySelector("#listadoJuegos");
-    if (oDiv != null) {
-        oDiv.remove();
-    }
+    // let oDiv = document.querySelector("#listadoJuegos");
+    // if (oDiv != null) {
+    //     oDiv.remove();
+    // }
 
 
     //Oculta el div del inicio "main"
