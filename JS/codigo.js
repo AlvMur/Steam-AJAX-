@@ -156,16 +156,16 @@ function altaUsuario() {
     let arrayFecha = dFecha.split("/");
     let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
     
-        var oCliente = {
+        let oCliente = {
             id_cliente: formAdministracionUsuario.txtNIFUsuario.value.trim(),
             nombre: formAdministracionUsuario.txtNombre.value.trim(),
             apellidos: formAdministracionUsuario.txtApellidos.value.trim(),
             fecha_nac: dFechaCambiada,
             email: formAdministracionUsuario.txtDireccion.value.trim()
         };
-        var sParametros = "datos=" + JSON.stringify(oCliente);
+        let sParametros = "datos=" + JSON.stringify(oCliente);
 
-        $.post("alta_cliente/altacliente.php", sParametros, respuestaAltaCliente, 'json');
+        $.post("../PHP/altacliente.php", sParametros, respuestaAltaCliente, 'json');
 }
 
 function respuestaAltaCliente(oDatos, sStatus, oXHR) {
@@ -186,28 +186,48 @@ function altaJuego() {
     let form = document.getElementById("formAdministracionJuegos");
     let inputs = form.getElementsByTagName("input");
 
-    let sTitulo = inputs[0].value;
-    let sGenero = inputs[1].value;
-    let dFechaLanzamiento = inputs[2].value;
-    let iPrecio = inputs[3].value;
-    let iPegi = inputs[4].value;
-
+    
     let res = validaExpRegJuego();
 
     if (res != "") {
         alert(res);
 
     } else {
-        let iPosicion = tienda.juegos.length;
-
-
+       
         let arrayFecha = dFechaLanzamiento.split("/");
 
         let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
 
         console.log(dFechaCambiada);
 
-        let oJuego = new Juego(iPosicion + 1, sTitulo, sGenero, dFechaCambiada, parseFloat(iPrecio), parseInt(iPegi));
+       /* let oJuego ={
+
+            titulo: document.getElementById("txtTitulo").value.trim(),
+            genero: document.getElementById("txtGenero").value.trim(),
+            año_lanzamiento: dFechaCambiada,
+            precio:parseFloat(document.getElementById("txtPrecio").value.trim()),
+            pegi:document.getElementById("txtPegi").value.trim()
+        };*/
+       let titulo= document.getElementById("txtTitulo").value.trim();
+       let genero= document.getElementById("txtGenero").value.trim();
+       let año_lanzamiento= dFechaCambiada;
+       let precio=parseFloat(document.getElementById("txtPrecio").value.trim());
+       let pegi=document.getElementById("txtPegi").value.trim();
+
+
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        alert("Juego insertado");
+        }
+    };
+        xmlhttp.open("POST", "../PHP/altajuego.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("titulo="+titulo+"&genero="+genero+"&año_lanzamiento="+año_lanzamiento+"&precio="+precio+"&pegi="+pegi);
+   
+  }
+
+       // let oJuego = new Juego(iPosicion + 1, sTitulo, sGenero, dFechaCambiada, parseFloat(iPrecio), parseInt(iPegi));
 
         if (tienda.registrarJuego(oJuego)) {
             alert("Juego dado de alta correctamente");
@@ -220,9 +240,16 @@ function altaJuego() {
 
     }
 
+   
+
+    
+
+   
 
 
-}
+
+
+
 
 function altaSuscriptor() {
     let form = document.getElementById("formAdministracionSuscriptor");
