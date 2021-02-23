@@ -61,6 +61,9 @@ function muestraTienda() {
     document.getElementById("listadoJuegos").style.display = "block";
     cargarComboGeneros();
     //tienda.listarJuegos();
+
+    let genero = $('#comboBoxGenero').find('option:selected').text();
+    muestraJuegos(genero);
 }
 
 function muestraBiblioteca() {
@@ -429,6 +432,12 @@ function respuestaBiblioteca(data,status,oXHR) {
 
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
 
+function muestraJuegos(genero){
+
+    $('#lista').find('tbody').load("PHP/mostrarjuego.php", "");
+}
+
+
 //-----------------------------METODOS AUXILIARES---------------------------------------------------//
 function _buscarCliente(emailBuscado) {
     let oClienteExistente = null;
@@ -505,3 +514,16 @@ function introduceCompra(oCompra) {
     tienda.registrarCompra(oCompra);
 }
 //------------------------------FIN METODOS AUXILIARES-----------------------------------------------//
+function loadXMLDoc(filename) {
+    if (window.XMLHttpRequest) {
+        var xhttp = new XMLHttpRequest();
+    } else // code for IE5 and IE6
+    {
+        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", filename, false);
+
+    xhttp.send();
+
+    return xhttp.responseXML;
+}
