@@ -14,7 +14,7 @@ $fecha_expiracion=$_POST["fecha_expiracion"];
 $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mysqli_error($conexion));
 mysqli_query($conexion,"utf8");
 
-$sql = "INSERT INTO subscripcion (id_cliente, fecha_expiracion, precio) VALUES ('"; 
+$sql = "INSERT INTO suscripcion (id_cliente, fecha_expiracion, precio) VALUES ('"; 
 $sql.= $id_cliente."','". $fecha_expiracion."',10);";
 $resultado = mysqli_query($conexion,$sql);
 
