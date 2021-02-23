@@ -155,8 +155,7 @@ function altaUsuario() {
     let dFecha = formAdministracionUsuario.txtFecha.value.trim();
     let arrayFecha = dFecha.split("/");
     let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
-    console.log(dFechaCambiada);
-    let res = validaExpRegJuego();
+    let res = validaExpRegUsuario();
 
     if (res != "") {
         alert(res);
@@ -202,10 +201,10 @@ function altaJuego() {
 
     } else {
        
-        let dFechaLanzamiento= document.getElementById("txtFechaJuego").value.trim();
+        
 
-        let arrayFecha = dFechaLanzamiento.split("/");
-
+        let dFecha =document.getElementById("txtFechaJuego").value.trim();
+        let arrayFecha = dFecha.split("/");
         let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
 
         console.log(dFechaCambiada);
