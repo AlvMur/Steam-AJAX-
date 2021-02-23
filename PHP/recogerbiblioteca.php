@@ -6,17 +6,23 @@ $basedatos = "steam_cliente";
 $usuario   = "root";
 $password  = "";
 
+// Recojo los datos de entrada
 
-extract($_POST);
+$email = $_GET["email"];
+
 
 // Creamos la conexión al servidor.
 $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mysqli_error($conexion));
 mysqli_set_charset($conexion,"utf8");
 mysqli_query($conexion,"utf8");
 
-$sql = "INSERT INTO juego (titulo,genero,año_lanzamiento,precio,pegi) VALUES ('$titulo','$genero','$año_lanzamiento','$precio', '$pegi');";
+$sql = "SELECT titulo,genero,año_lanzamiento,precio,pegi FROM juego INNER JOIN compra ON juego.id_juego = compra.id_juego INNER JOIN cliente ON compra.id_cliente=cliente.id_cliente WHERE cliente.email LIKE '$email'";
 
 $resultado = mysqli_query($conexion,$sql);
+$arrayADevolver=array();
+while($fila= mysqli_fetch_assoc($resultado)){
+$arrayADevolver[]=$fila;
+}
 
 if ($resultado){
     $respuesta["error"] = 0;
@@ -25,8 +31,8 @@ if ($resultado){
     $respuesta["error"] = 1;
     $respuesta["mensaje"] = "Error en el proceso de alta: ".mysqli_error($conexion);
 }
-
-echo json_encode($respuesta);
+$datosJSON = json_encode($arrayADevolver);
+echo $datosJSON;
 
 mysqli_close($conexion);
 ?>

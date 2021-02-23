@@ -229,6 +229,7 @@ function altaJuego() {
         xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
         alert("Juego insertado");
+        //alert(xmlhttp.responseText);
         }
     };
         xmlhttp.open("POST", "PHP/altajuego.php", true);
@@ -316,7 +317,7 @@ function bibliotecaBuscada() {
         alert(res);
     } else {
 
-        var cliente = _buscarCliente(sEmail);
+       /* var cliente = _buscarCliente(sEmail);
         if (cliente != null) {
             var id = cliente["iId"];
             var fechaActual = Date.now();
@@ -336,13 +337,37 @@ function bibliotecaBuscada() {
                 }
                 form.style.display = "none";
                 tienda.listarJuegosDeCliente(idJuegosComprados);
-            }
-        } else {
+            }*/
+            $.getJSON('PHP/recogerbiblioteca.php',{email:sEmail},respuestaBiblioteca);
+           
+             /* $.ajax({
+                dataType: 'json',
+                url: 'PHP/recogerbiblioteca.php',
+                data: {email:sEmail},
+                success: function (data) {
+                  // begin accessing JSON data here
+                  console.log(JSON.stringify(data));
+                },
+              })*/
+            
+        } /*else {
             alert("El cliente no existe");
-        }
+        }*/
 
     }
+
+function respuestaBiblioteca(data,status,oXHR) {
+
+    console.log(data);
+    console.log(status);
+    console.log(oXHR);
+   
+    
+
+
+    
 }
+
 
 
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
