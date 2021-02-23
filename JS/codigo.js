@@ -59,6 +59,7 @@ function muestraTienda() {
     ocultarFormularios();
 
     document.getElementById("listadoJuegos").style.display = "block";
+    cargarComboGeneros();
     //tienda.listarJuegos();
 
 
@@ -256,9 +257,22 @@ function altaJuego() {
     }
 
    
+/////////////////////////////////Cargar Combo Géneros//////////////////////////////////////////////////////
+function cargarComboGeneros() {
+    if (localStorage["generos"] != undefined) {
+        $("#comboBoxGenero").html(localStorage["generos"]);
+    } 
+    else {
+        $.get("PHP/getGeneros.php", null, tratarGetGeneros, 'html');
+    }
+}
 
-    
+function tratarGetGeneros(sHTML) {
+    localStorage["generos"] = sHTML;
 
+    $("#comboBoxGenero").html(localStorage["generos"]);
+}
+//////////////////////////////////////////////////////////////////////////////////////
    
 
 
