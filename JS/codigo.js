@@ -29,6 +29,11 @@ document.getElementById("btnAceptarAltaJuego").addEventListener("click", altaJue
 document.getElementById("btnDarAltaSuscriptor").addEventListener("click", altaSuscriptor);
 document.getElementById("btnBuscaBiblioteca").addEventListener("click", bibliotecaBuscada);
 
+if(document.getElementById("comboBoxGenero")!=null){
+    let oCombo= document.getElementById("comboBoxGenero");
+    oCombo.addEventListener("change",filtraJuegos);
+}
+
 
 let arrayBotonesTienda = document.getElementsByName("btnMandarTienda");
 for (let i = 0; i < arrayBotonesTienda.length; i++) {
@@ -214,6 +219,7 @@ function altaJuego() {
         let arrayFecha = dFecha.split("/");
         let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
 
+
         console.log(dFechaCambiada);
 
        /* let oJuego ={
@@ -226,8 +232,8 @@ function altaJuego() {
         };*/
        let titulo= document.getElementById("txtTitulo").value.trim();
        let genero= document.getElementById("txtGenero").value.trim();
-       let año_lanzamiento= dFechaCambiada;
-       console.log(año_lanzamiento);
+       let anyo_lanzamiento= dFechaCambiada;
+      // console.log(año_lanzamiento);
        let precio=parseFloat(document.getElementById("txtPrecio").value.trim());
        let pegi=document.getElementById("txtPegi").value.trim();
 
@@ -242,7 +248,7 @@ function altaJuego() {
     };
         xmlhttp.open("POST", "PHP/altajuego.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("titulo="+titulo+"&genero="+genero+"&año_lanzamiento="+año_lanzamiento+"&precio="+precio+"&pegi="+pegi);
+        xmlhttp.send("titulo="+titulo+"&genero="+genero+"&anyo_lanzamiento="+anyo_lanzamiento+"&precio="+precio+"&pegi="+pegi);
    
   }
 
@@ -423,13 +429,23 @@ function respuestaBiblioteca(data,status,oXHR) {
     
 }
 
+function filtraJuegos(oEvento) {
+    
+    let oE = oEvento || window.event;
+
+    console.log(oE.target.value);
+
+    muestraJuegos(oE.target.value);
+
+}
 
 
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
 
 function muestraJuegos(genero){
 
-    $('#lista').find('tbody').load("PHP/mostrarjuego.php", "");
+
+    $('#lista').find('tbody').load("PHP/mostrarjuego.php", {genero:genero});
 }
 
 

@@ -14,7 +14,7 @@ $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mys
 mysqli_set_charset($conexion,"utf8");
 mysqli_query($conexion,"utf8");
 
-$sql = "INSERT INTO juego (titulo,genero,año_lanzamiento,precio,pegi) VALUES ('$titulo','$genero','$año_lanzamiento','$precio', '$pegi');";
+$sql = "INSERT INTO juego (titulo,genero,anyo_lanzamiento,precio,pegi) VALUES ('$titulo','$genero','$anyo_lanzamiento','$precio', '$pegi');";
 
 $resultado = mysqli_query($conexion,$sql);
 
