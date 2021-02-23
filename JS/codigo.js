@@ -58,8 +58,9 @@ function muestraInicio() {
 function muestraTienda() {
     ocultarFormularios();
 
-
-    tienda.listarJuegos();
+    document.getElementById("listadoJuegos").style.display = "block";
+    cargarComboGeneros();
+    //tienda.listarJuegos();
 }
 
 function muestraBiblioteca() {
@@ -92,21 +93,22 @@ function ocultarFormularios() {
     //Oculta las tablas
     let oTabla = document.getElementsByTagName("table");
     if (document.querySelector("#listadoJuegos") != null)
-        document.querySelector("#listadoJuegos").remove();
-    if (oTabla != null) {
-        for (let index = 0; index < oTabla.length; index++) {
-            oTabla[index].remove();
+    //    document.querySelector("#listadoJuegos").remove();
+        document.querySelector("#listadoJuegos").style.display = "none";
+    // if (oTabla != null) {
+    //     for (let index = 0; index < oTabla.length; index++) {
+    //         oTabla[index].remove();
 
-        }
+    //     }
 
-    }
+    // }
 
 
     //Oculta el div con el comboBox
-    let oDiv = document.querySelector("#listadoJuegos");
-    if (oDiv != null) {
-        oDiv.remove();
-    }
+    // let oDiv = document.querySelector("#listadoJuegos");
+    // if (oDiv != null) {
+    //     oDiv.remove();
+    // }
 
 
     //Oculta el div del inicio "main"
@@ -252,9 +254,22 @@ function altaJuego() {
     }
 
    
+/////////////////////////////////Cargar Combo Géneros//////////////////////////////////////////////////////
+function cargarComboGeneros() {
+    if (localStorage["generos"] != undefined) {
+        $("#comboBoxGenero").html(localStorage["generos"]);
+    } 
+    else {
+        $.get("PHP/getGeneros.php", null, tratarGetGeneros, 'html');
+    }
+}
 
-    
+function tratarGetGeneros(sHTML) {
+    localStorage["generos"] = sHTML;
 
+    $("#comboBoxGenero").html(localStorage["generos"]);
+}
+//////////////////////////////////////////////////////////////////////////////////////
    
 
 

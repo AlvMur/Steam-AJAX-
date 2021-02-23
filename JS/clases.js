@@ -70,7 +70,6 @@ class Tienda {
 
         ocultarFormularios();
 
-
         var oLabel = document.createElement("LABEL");
         oLabel.textContent = "Filtre por género: ";
         var oCombo = document.createElement("SELECT");
