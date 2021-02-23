@@ -11,17 +11,25 @@ $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mys
 mysqli_query($conexion,"utf8");
 
 // Consulta SQL para obtener los datos de los centros.
-$sql = "select * from juegos";
+$sql = "select id_juego, titulo, genero, anyo_lanzamiento as anyo, precio, pegi from juego";
 $resultados = mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
 
-$datos = [];
+$XML ='<?xml version="1.0" encoding="UTF-8"?>';
+$XML .='<datos>';
 
 while ($fila = mysqli_fetch_array($resultados)) {
-    // Almacenamos en un array cada una de las filas que vamos leyendo del recordset.
-    $datos[] = $fila;
+    
+    $XML .='<juego>';
+        $XML .='<id_juego>'.$fila["id_juego"].'</id_juego>';
+        $XML .='<titulo>'.$fila["titulo"].'</titulo>';
+        $XML .='<genero>'.$fila["genero"].'</genero>';
+        $XML .='<anyo_lanzamiento>'.$fila["anyo"].'</anyo_lanzamiento>';
+        $XML .='<precio>'.$fila["precio"].'</precio>';
+        $XML .='<pegi>'.$fila["pegi"].'</pegi>';
+    $XML .='</juego>';
 }
 
- 
+ echo $XML;
 
 mysqli_close($conexion);
 ?>

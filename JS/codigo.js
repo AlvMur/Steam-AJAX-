@@ -62,7 +62,6 @@ function muestraTienda() {
     cargarComboGeneros();
     //tienda.listarJuegos();
 
-
     let genero = $('#comboBoxGenero').find('option:selected').text();
     muestraJuegos(genero);
 }
@@ -366,34 +365,32 @@ function bibliotecaBuscada() {
 
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
 
-function muestraJuegos(){
+function muestraJuegos(genero){
 
-
-    $('#lista').find('tbody').load("mostrarjuego.php", "", respuestaMuestraJuegos());
-
-    // $.post("PHP/altacliente.php", sParametros, respuestaAltaCliente, 'json');
-
+    $('#lista').find('tbody').load("PHP/mostrarjuego.php", "", respuestaMuestraJuegos());
 }
+
 function respuestaMuestraJuegos(oDatos, sStatus, oXHR) {
 
-    // var sTabla = '<table border="1">';
+    alert("Los datos se han cargado correctamente");
+    
+    
+    
+     //var oXML = loadXMLDoc(oDatos);
+    // var oJuegos = oXML.getElementsByTagName("juego");
 
-    // sTabla += '<thead><tr><th>CodCliente</th><th>Nombre</th><th>Apellidos</th><th>Telefono</th></thead>';
+    //  for (var i = 0; i < oJuegos.length; i++) {
 
-    // sTabla += "<tbody>";
-    // for (var i = 0; i < oDatos.length; i++) {
-    //     sTabla += "<tr>";
-    //     sTabla += "<td>" + oDatos[i].CodCliente + "</td>";
-    //     sTabla += "<td>" + oDatos[i].Nombre + "</td>";
-    //     sTabla += "<td>" + oDatos[i].Apellidos + "</td>";
-    //     sTabla += "<td>" + oDatos[i].Telefono + "</td>";
-    //     sTabla += "</tr>";
-    // }
-    // sTabla += "</tbody></table>";
+    //     // console.log(oJuegos[i]);
+    //     var titulo = oJuegos[i].getElementsByTagName("titulo")[0].textContent;
+    //     var genero = oJuegos[i].getElementsByTagName("genero")[0].textContent;
+    //     var anyo = oJuegos[i].getElementsByTagName("anyo")[0].textContent;
+    //     var precio = oJuegos[i].getElementsByTagName("precio")[0].textContent;
+    //     var pegi = oJuegos[i].getElementsByTagName("pegi")[0].textContent;
 
-    // var oVentana = window.open("", "_blank");
-
-    // oVentana.document.body.innerHTML = sTabla;
+    //     alert(titulo);
+    //  }
+    
 }
 //-----------------------------METODOS AUXILIARES---------------------------------------------------//
 function _buscarCliente(emailBuscado) {
@@ -471,3 +468,16 @@ function introduceCompra(oCompra) {
     tienda.registrarCompra(oCompra);
 }
 //------------------------------FIN METODOS AUXILIARES-----------------------------------------------//
+function loadXMLDoc(filename) {
+    if (window.XMLHttpRequest) {
+        var xhttp = new XMLHttpRequest();
+    } else // code for IE5 and IE6
+    {
+        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", filename, false);
+
+    xhttp.send();
+
+    return xhttp.responseXML;
+}
