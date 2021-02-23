@@ -95,6 +95,8 @@ function ocultarFormularios() {
     if (document.querySelector("#listadoJuegos") != null)
     //    document.querySelector("#listadoJuegos").remove();
         document.querySelector("#listadoJuegos").style.display = "none";
+    if(document.querySelector("#listadoJuegosCliente")!=null)
+    document.querySelector("#listadoJuegosCliente").style.display="none";
     // if (oTabla != null) {
     //     for (let index = 0; index < oTabla.length; index++) {
     //         oTabla[index].remove();
@@ -231,6 +233,7 @@ function altaJuego() {
         xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
         alert("Juego insertado");
+        //console.log(xmlhttp);
         //alert(xmlhttp.responseText);
         }
     };
@@ -288,7 +291,21 @@ function altaSuscriptor() {
         alert(res);
     } else {
 
-        let iPosicion = tienda.suscripciones.length;
+        var dFechaActual = new Date();
+        let dFechaExpiracion = new Date();
+        dFechaExpiracion.setMonth(dFechaActual.getMonth() + 1);
+
+        $.ajax({
+            url : 'PHP/altasuscriptor.php',
+            data : { id_cliente : sNIF , fecha_expiracion :  dFechaExpiracion},
+            type : 'POST',
+            dataType : 'json',
+            success : procesarRespuestaAltaSubcriptor
+    });
+}
+
+
+        /* let iPosicion = tienda.suscripciones.length;
         var dFechaActual = new Date();
         let dFechaExpiracion = new Date();
 
@@ -311,13 +328,16 @@ function altaSuscriptor() {
             }
         } else {
             alert("El cliente no existe para suscribirse");
-        }
-
-
-
-
-
+        } */
+    
+}
+function procesarRespuestaAltaSubcriptor(datos, textStatus, jqXHR){
+    console.log(datos);
+    if (datos.error == 0) { //Si no hay error
+        formAdministracionSuscriptor.reset()
     }
+
+    alert(datos.mensaje);
 }
 
 function bibliotecaBuscada() {
@@ -359,6 +379,7 @@ function bibliotecaBuscada() {
                 dataType: 'json',
                 url: 'PHP/recogerbiblioteca.php',
                 data: {email:sEmail},
+                type:'POST',
                 success: function (data) {
                   // begin accessing JSON data here
                   console.log(JSON.stringify(data));
@@ -377,8 +398,19 @@ function respuestaBiblioteca(data,status,oXHR) {
     console.log(status);
     console.log(oXHR);
    
+    let divBiblioteca = document.querySelector("#listadoJuegosCliente");
     
+    let tabla = divBiblioteca.querySelector("#lista");
+    let tBody = tabla.querySelector("tbody");
+    tBody.innerHTML="";
 
+    for (let index = 0; index < data.length; index++) {
+        
+        tBody.innerHTML+="<tr><td>"+data[index].titulo+"</td><td>"+data[index].genero+"</td><td>"+data[index].año_lanzamiento+"</td><td>"+data[index].precio+"</td><td>"+data[index].pegi+"</td></tr>";
+        
+    }
+
+    divBiblioteca.style.display="block";
 
     
 }
