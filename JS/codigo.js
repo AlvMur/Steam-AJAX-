@@ -323,6 +323,7 @@ function muestraTabla(data,status,oXHR) {
     var table = "<table border='1'>";
     //console.log(data.querySelector("juego titulo"));
     table+="<tr><th colspan='2'>DATOS COMPRA</th></tr>";
+    table+='<tr><td>Email: </td><td><input id="id_juego" type="hidden" value="'+oOptions[0].querySelector("id").textContent+'"></td></tr>';
     table+='<tr><td>Email: </td><td><input id="email" type="text" placeholder="Introduzca un email"></td></tr>';
     table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions[0].querySelector("titulo").textContent+'" readonly></td></tr>';
     table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions[0].querySelector("genero").textContent+'" readonly></td></tr>';
@@ -346,7 +347,7 @@ function muestraTabla(data,status,oXHR) {
     
 
     let email = document.getElementById("email").value;
-    console.log(email);
+    //console.log(email);
     if(email ==""){
         alert("Debe rellenar el campo del correo");
     }else{
@@ -362,13 +363,14 @@ function muestraTabla(data,status,oXHR) {
              alert("No existe ese correo");
         } 
         else {
-            console.log("El id del cliente es: "+oDatos);
+            //console.log("El id del cliente es: "+oDatos);
             let precioCompra = document.getElementById("precio").value;
-            let id_juegoCompra = oOptions[0].querySelector("id").textContent;
+            let id_juegoCompra = document.getElementById("id_juego").value;
             let fechaCompra = new Date();
-
+            let dFechaCompraParseada= fechaCompra.getFullYear()+"-"+fechaCompra.getMonth()+"-"+fechaCompra.getDate();
+            console.log(dFechaCompraParseada);
             //Una vez confirmamos que existe, realiza el insert en las compras
-            $.post("PHP/altaCompra.php", {id_cliente: oDatos,id_juego:id_juegoCompra,fecha: fechaCompra, precio:precioCompra}, respuestaCompra, 'text');
+            $.post("PHP/altaCompra.php", {id_cliente: oDatos,id_juego:id_juegoCompra,fecha: dFechaCompraParseada, precio:precioCompra}, respuestaCompra, 'json');
          }
     }
     
