@@ -319,17 +319,17 @@ function muestraTabla(data,status,oXHR) {
 
     var oOptions = data.querySelectorAll("juego");
     // console.log(oOptions);
-    var sOptions = "";
+    
     var table = "<table border='1'>";
     //console.log(data.querySelector("juego titulo"));
     table+="<tr><th colspan='2'>DATOS COMPRA</th></tr>";
-    table+='<tr><td>Email: </td><td><input id="email" type="text" placeholder="Introduzca un email"></td><tr>';
+    table+='<tr><td>Email: </td><td><input id="email" type="text" placeholder="Introduzca un email"></td></tr>';
     table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions[0].querySelector("titulo").textContent+'" readonly></td></tr>';
     table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions[0].querySelector("genero").textContent+'" readonly></td></tr>';
     table+='<tr><td>Año: </td><td><input type=text value="'+oOptions[0].querySelector("anno").textContent+'" readonly></td></tr>';
     table+='<tr><td>Precio: </td><td><input type=text value="'+oOptions[0].querySelector("precio").textContent+'" readonly></td></tr>';
     table+='<tr><td>Pegi: </td><td><input type=text value="'+oOptions[0].querySelector("pegi").textContent+'" readonly></td></tr>';
-    table+='<tr><td colspan="2" style="text-align: center;"><input class="btn btn-sm" type="button" onclick="'+realizaCompra()+'" value="Comprar"></td></tr>';
+    table+='<tr><td colspan="2" style="text-align: center;"><input class="btn btn-sm" type="button" onclick=realizaCompra() value="Comprar"></td></tr>';
     table += "</table>";
 
     console.log("La tabla "+table);
@@ -344,12 +344,31 @@ function muestraTabla(data,status,oXHR) {
 
   function realizaCompra(){
     
-    //Primero hay que hacer una llamada AJAX recogiendo email y comprobando que existe en la BD
 
+    let email = document.getElementById("email").value;
+    console.log(email);
+    if(email ==""){
+        alert("Debe rellenar el campo del correo");
+    }else{
 
-    //Una vez confirmamos que existe, realiza el insert en las compras
-
+        //Primero hay que hacer una llamada AJAX recogiendo email y comprobando que existe en la BD 
+        
+        //$.get("PHP/getIdCliente.php", {emailBusca: email}, respuestaEmail, 'text');
+    }
+        
+    function respuestaEmail(oDatos, sStatus, oXHR){
+       
+        // if (oDatos == "") {
+        //     alert("No existe ese correo");
+        // } else {
+        //     console.log("El id del cliente es: "+oDatos);
+        //     //Una vez confirmamos que existe, realiza el insert en las compras
+        //     $.get("PHP/getIdCliente.php", {emailBusca: email}, respuestaEmail, 'text');
+        // }
+    }
     
+
+
 }
 
 
