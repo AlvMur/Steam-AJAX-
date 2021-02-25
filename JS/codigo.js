@@ -313,12 +313,12 @@ function comprar(idJuego) {
 
 function muestraTabla(data,status,oXHR) {
     
-    // console.log(data);
+    console.log(data);
     // console.log(status);
     // console.log(oXHR);
 
     var oOptions = data.querySelectorAll("juego");
-    // console.log(oOptions);
+    //console.log(oOptions);
     
     var table = "<table border='1'>";
     //console.log(data.querySelector("juego titulo"));
@@ -327,7 +327,7 @@ function muestraTabla(data,status,oXHR) {
     table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions[0].querySelector("titulo").textContent+'" readonly></td></tr>';
     table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions[0].querySelector("genero").textContent+'" readonly></td></tr>';
     table+='<tr><td>Año: </td><td><input type=text value="'+oOptions[0].querySelector("anno").textContent+'" readonly></td></tr>';
-    table+='<tr><td>Precio: </td><td><input type=text value="'+oOptions[0].querySelector("precio").textContent+'" readonly></td></tr>';
+    table+='<tr><td>Precio: </td><td><input id="precio" type=text value="'+oOptions[0].querySelector("precio").textContent+'" readonly></td></tr>';
     table+='<tr><td>Pegi: </td><td><input type=text value="'+oOptions[0].querySelector("pegi").textContent+'" readonly></td></tr>';
     table+='<tr><td colspan="2" style="text-align: center;"><input class="btn btn-sm" type="button" onclick=realizaCompra() value="Comprar"></td></tr>';
     table += "</table>";
@@ -353,21 +353,29 @@ function muestraTabla(data,status,oXHR) {
 
         //Primero hay que hacer una llamada AJAX recogiendo email y comprobando que existe en la BD 
         
-        //$.get("PHP/getIdCliente.php", {emailBusca: email}, respuestaEmail, 'text');
+        $.get("PHP/getIdCliente.php", {emailBusca: email}, respuestaEmail, 'text');
     }
         
     function respuestaEmail(oDatos, sStatus, oXHR){
        
-        // if (oDatos == "") {
-        //     alert("No existe ese correo");
-        // } else {
-        //     console.log("El id del cliente es: "+oDatos);
-        //     //Una vez confirmamos que existe, realiza el insert en las compras
-        //     $.get("PHP/getIdCliente.php", {emailBusca: email}, respuestaEmail, 'text');
-        // }
+        if (oDatos == "") {
+             alert("No existe ese correo");
+        } 
+        else {
+            console.log("El id del cliente es: "+oDatos);
+            let precioCompra = document.getElementById("precio").value;
+            let id_juegoCompra = oOptions[0].querySelector("id").textContent;
+            let fechaCompra = new Date();
+
+            //Una vez confirmamos que existe, realiza el insert en las compras
+            $.post("PHP/altaCompra.php", {id_cliente: oDatos,id_juego:id_juegoCompra,fecha: fechaCompra, precio:precioCompra}, respuestaCompra, 'text');
+         }
     }
     
-
+    function respuestaCompra(oDatos, sStatus, oXHR){
+            alert(oDatos.mensaje);
+            ocultarFormularios();
+    }
 
 }
 

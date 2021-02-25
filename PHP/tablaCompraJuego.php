@@ -24,7 +24,8 @@ $XML ='<?xml version="1.0" encoding="UTF-8"?>';
 $XML .='<datos>';
 
 while ($fila = mysqli_fetch_array($resultados)) {
-    $XML .='<juego id="'.$fila["id_juego"].'">';
+    $XML .='<juego>';
+    $XML .='<id>'.$fila["id_juego"].'</id>';
         $XML .='<titulo>'.$fila["titulo"].'</titulo>';
         $XML .='<genero>'.$fila["genero"].'</genero>';
         $XML .='<anno>'.$fila["anyo"].'</anno>';

@@ -12,9 +12,12 @@ mysqli_set_charset($conexion,"utf8");
 
 $email = $_GET["emailBusca"];
 // Consulta SQL para obtener los datos de los centros.
-$sql = "SELECT id_cliente FROM cliente where email ='".$email."'";
+$sqlTraeId= "SELECT id_cliente FROM cliente WHERE email LIKE '$email'";
+$resultadoId=mysqli_query($conexion,$sqlTraeId);
+$fila=mysqli_fetch_assoc($resultadoId);
+$id_cliente_buscado=$fila["id_cliente"];
 
-echo $sql;
+echo $id_cliente_buscado;
 
 mysqli_close($conexion);
 ?>
