@@ -105,8 +105,8 @@ function limpiarInputs(inputs) {
 function altaUsuario() {
 
     let dFecha = formAdministracionUsuario.txtFecha.value.trim();
-    let arrayFecha = dFecha.split("/");
-    let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
+    //let arrayFecha = dFecha.split("/");
+    //let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
     let res = validaExpRegUsuario();
 
     if (res != "") {
@@ -118,7 +118,7 @@ function altaUsuario() {
             id_cliente: formAdministracionUsuario.txtNIFUsuario.value.trim(),
             nombre: formAdministracionUsuario.txtNombre.value.trim(),
             apellidos: formAdministracionUsuario.txtApellidos.value.trim(),
-            fecha_nac: dFechaCambiada,
+            fecha_nac: dFecha,
             email: formAdministracionUsuario.txtDireccion.value.trim()
         };
         let sParametros = "datos=" + JSON.stringify(oCliente);
@@ -151,10 +151,10 @@ function altaJuego() {
     else {
         let dFecha =document.getElementById("txtFechaJuego").value.trim();
         let arrayFecha = dFecha.split("/");
-        let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
+       // let dFechaCambiada = new Date(arrayFecha[2], arrayFecha[1] - 1, arrayFecha[0]);
         let titulo= document.getElementById("txtTitulo").value.trim();
         let genero= document.getElementById("txtGenero").value.trim();
-        let anyo_lanzamiento= dFechaCambiada;
+       // let anyo_lanzamiento= dFechaCambiada;
         let precio=parseFloat(document.getElementById("txtPrecio").value.trim());
         let pegi=document.getElementById("txtPegi").value.trim();
 
@@ -168,7 +168,7 @@ function altaJuego() {
 
         xmlhttp.open("POST", "PHP/altajuego.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.send("titulo="+titulo+"&genero="+genero+"&anyo_lanzamiento="+anyo_lanzamiento+"&precio="+precio+"&pegi="+pegi); 
+        xmlhttp.send("titulo="+titulo+"&genero="+genero+"&anyo_lanzamiento="+dFecha+"&precio="+precio+"&pegi="+pegi); 
         
         limpiarInputs(inputs);
         ocultarFormularios();
@@ -201,13 +201,16 @@ function altaSuscriptor() {
         alert(res);
     } else {
 
-        var dFechaActual = new Date();
+        let dFechaActual = new Date();
         let dFechaExpiracion = new Date();
         dFechaExpiracion.setMonth(dFechaActual.getMonth() + 1);
 
+        let dFechaExpiracionParseada= dFechaExpiracion.getFullYear()+"-"+dFechaExpiracion.getMonth()+"-"+dFechaExpiracion.getDate();
+        console.log("Fecha parseada :"+dFechaExpiracionParseada);
+
         let oSuscripcion={
             id_cliente : sNIF,
-            fecha_expiracion :  dFechaExpiracion
+            fecha_expiracion :  dFechaExpiracionParseada
         }
         $.ajax({
             url : 'PHP/altasuscriptor.php',

@@ -61,8 +61,9 @@ function validaExpRegUsuario() {
         document.getElementById("txtApellidosCliente").classList.remove("error");
     }       
             
-    //Validar Fecha de Nacimiento    
-    if (!expRegFecha.test(dNacimiento)) {
+    //Validar Fecha de Nacimiento   
+    //!expRegFecha.test(dNacimiento) 
+    if (dNacimiento=="") {
         if(bValido){
             document.getElementById("txtFechaCliente").focus();
             bValido = false;
@@ -129,7 +130,8 @@ function validaExpRegJuego() {
         }
 
         //Validar Fecha de Lanzamiento
-        if (!expRegFecha.test(dLanzamiento)) {
+        //!expRegFecha.test(dLanzamiento)
+        if (dLanzamiento=="") {
             if(bValido){
                 document.getElementById("txtFechaJuego").focus();
                 bValido = false;
