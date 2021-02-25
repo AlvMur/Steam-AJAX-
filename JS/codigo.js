@@ -313,29 +313,43 @@ function comprar(idJuego) {
 
 function muestraTabla(data,status,oXHR) {
     
-    console.log(data);
-    console.log(status);
-    console.log(oXHR);
+    // console.log(data);
+    // console.log(status);
+    // console.log(oXHR);
 
     var oOptions = data.querySelectorAll("juego");
-    console.log(oOptions);
+    // console.log(oOptions);
     var sOptions = "";
-    var table = "<table>";
-    table+="<tr><th>"+oOptions.querySelector("titulo")+"</th></tr>";
-    table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions.querySelector("titulo")+'" readonly></td></tr>';
-    table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions.querySelector("genero")+'" readonly></td></tr>';
-    table+='<tr><td>Año: </td><td><input type=text value="'+oOptions.querySelector("anno")+'" readonly></td></tr>';
-    table+='<tr><td>Precio: </td><td><input type=text value="'+oOptions.querySelector("precio")+'" readonly></td></tr>';
-    table+='<tr><td>Pegi: </td><td><input type=text value="'+oOptions.querySelector("pegi")+'" readonly></td></tr>';
-    table+='<tr><td><input type="'+button+'" onclick="'+realizaCompra()+'"></td></tr>';
+    var table = "<table border='1'>";
+    //console.log(data.querySelector("juego titulo"));
+    table+="<tr><th colspan='2'>DATOS COMPRA</th></tr>";
+    table+='<tr><td>Email: </td><td><input id="email" type="text" placeholder="Introduzca un email"></td><tr>';
+    table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions[0].querySelector("titulo").textContent+'" readonly></td></tr>';
+    table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions[0].querySelector("genero").textContent+'" readonly></td></tr>';
+    table+='<tr><td>Año: </td><td><input type=text value="'+oOptions[0].querySelector("anno").textContent+'" readonly></td></tr>';
+    table+='<tr><td>Precio: </td><td><input type=text value="'+oOptions[0].querySelector("precio").textContent+'" readonly></td></tr>';
+    table+='<tr><td>Pegi: </td><td><input type=text value="'+oOptions[0].querySelector("pegi").textContent+'" readonly></td></tr>';
+    table+='<tr><td colspan="2" style="text-align: center;"><input class="btn btn-sm" type="button" onclick="'+realizaCompra()+'" value="Comprar"></td></tr>';
     table += "</table>";
 
-    console.log(table);
+    console.log("La tabla "+table);
     let oDiv = document.createElement("div");
-    oDiv.innerHTML=table;
-    document.body.innerHTML=oDiv;
+    oDiv.setAttribute("id", "compraTabla");
+    
+    console.log("oDIV "+oDiv.textContent);
+    document.body.appendChild(oDiv);
+    $('#compraTabla').html(table);
 
   }
 
+  function realizaCompra(){
+    
+    //Primero hay que hacer una llamada AJAX recogiendo email y comprobando que existe en la BD
+
+
+    //Una vez confirmamos que existe, realiza el insert en las compras
+
+    
+}
 
 
