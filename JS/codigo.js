@@ -42,7 +42,14 @@ function muestraTienda() {
     cargarComboGeneros();
 
     let genero = $('#comboBoxGenero').find('option:selected').text();
-    muestraJuegos(genero);
+    //console.log("Genero:"+genero);
+    if(genero==""){
+        muestraJuegos("CUALQUIERA");
+    }else{
+        muestraJuegos(genero);
+    }
+    
+   
 }
 
 function muestraBiblioteca() {

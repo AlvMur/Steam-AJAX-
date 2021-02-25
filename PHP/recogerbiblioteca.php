@@ -18,13 +18,35 @@ $conexion = mysqli_connect($servidor, $usuario, $password,$basedatos) or die(mys
 mysqli_set_charset($conexion,"utf8");
 mysqli_query($conexion,"utf8");
 
-$sql = "SELECT titulo,genero,anyo_lanzamiento,precio,pegi FROM juego INNER JOIN compra ON juego.id_juego = compra.id_juego INNER JOIN cliente ON compra.id_cliente=cliente.id_cliente WHERE cliente.email LIKE '$email'";
+//Recoge el id del cliente al cual se le introduce su email en el input
+$sqlTraeId= "SELECT id_cliente FROM cliente WHERE email LIKE '$email'";
+$resultadoId=mysqli_query($conexion,$sqlTraeId);
+$fila=mysqli_fetch_assoc($resultadoId);
+$id=$fila["id_cliente"];
 
-$resultado = mysqli_query($conexion,$sql);
-$arrayADevolver=array();
-while($fila= mysqli_fetch_assoc($resultado)){
-$arrayADevolver[]=$fila;
+$sqlTraeSuscripcion="SELECT COUNT(*) as cuenta FROM suscripcion WHERE id_cliente ='$id'";
+$resultadoTraeSuscripcion= mysqli_query($conexion,$sqlTraeSuscripcion);
+$fila=mysqli_fetch_assoc($resultadoTraeSuscripcion);
+$cuenta=$fila["cuenta"];
+
+if($cuenta>0){
+    $sqlTodosJuegos="SELECT titulo,genero,anyo_lanzamiento,precio,pegi FROM juego";
+    $resultado = mysqli_query($conexion,$sqlTodosJuegos);
+    $arrayADevolver=array();
+    while($fila= mysqli_fetch_assoc($resultado)){
+    $arrayADevolver[]=$fila;
+    }
+}else{
+    $sql = "SELECT titulo,genero,anyo_lanzamiento,precio,pegi FROM juego INNER JOIN compra ON juego.id_juego = compra.id_juego INNER JOIN cliente ON compra.id_cliente=cliente.id_cliente WHERE cliente.email LIKE '$email'";
+
+    $resultado = mysqli_query($conexion,$sql);
+    $arrayADevolver=array();
+    while($fila= mysqli_fetch_assoc($resultado)){
+    $arrayADevolver[]=$fila;
+    }
 }
+
+
 
 if ($resultado){
     $respuesta["error"] = 0;
