@@ -298,3 +298,44 @@ function muestraJuegos(genero){
 }
 //-----------------------------FIN REGISTRAR USUARIOS Y JUEGOS (ADMINISTRACION)---------------------//
 
+function comprar(idJuego) {
+    ocultarFormularios();
+
+    $.ajax({
+        dataType: 'xml',
+        url: 'PHP/tablaCompraJuego.php',
+        data: {id_juego:idJuego},
+        type:'GET',
+        success: muestraTabla
+      });  
+
+}
+
+function muestraTabla(data,status,oXHR) {
+    
+    console.log(data);
+    console.log(status);
+    console.log(oXHR);
+
+    var oOptions = data.querySelectorAll("juego");
+    console.log(oOptions);
+    var sOptions = "";
+    var table = "<table>";
+    table+="<tr><th>"+oOptions.querySelector("titulo")+"</th></tr>";
+    table+='<tr><td>Nombre: </td><td><input type=text value="'+oOptions.querySelector("titulo")+'" readonly></td></tr>';
+    table+='<tr><td>Genero: </td><td><input type=text value="'+oOptions.querySelector("genero")+'" readonly></td></tr>';
+    table+='<tr><td>Año: </td><td><input type=text value="'+oOptions.querySelector("anno")+'" readonly></td></tr>';
+    table+='<tr><td>Precio: </td><td><input type=text value="'+oOptions.querySelector("precio")+'" readonly></td></tr>';
+    table+='<tr><td>Pegi: </td><td><input type=text value="'+oOptions.querySelector("pegi")+'" readonly></td></tr>';
+    table+='<tr><td><input type="'+button+'" onclick="'+realizaCompra()+'"></td></tr>';
+    table += "</table>";
+
+    console.log(table);
+    let oDiv = document.createElement("div");
+    oDiv.innerHTML=table;
+    document.body.innerHTML=oDiv;
+
+  }
+
+
+
